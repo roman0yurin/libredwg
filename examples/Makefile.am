@@ -21,9 +21,19 @@ AM_CFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/src -Wall -Wextra
 LDADD   = $(top_builddir)/src/libredwg.la -lm
 
 check_PROGRAMS = load_dwg dwg2svg2
+EXTRA_PROGRAMS = unknown
 
 load_dwg_SOURCES = load_dwg.c
 dwg2svg2_SOURCES = dwg2svg2.c
+unknown_SOURCES  = unknown.c alldwg.inc
+
+alldwg.inc: log_unknown.pl
+	-cd .. && ./logs.sh; \
+	  mv examples/alldwg.inc examples/alldwg.inc~; \
+	  for l in *.log; do \
+	    b=`basename $l .log`; \
+	    examples/log_unknown.pl $l >>examples/alldwg.inc; \
+	  done
 
 if HAVE_WINE
 TESTS_ENVIRONMENT = \
@@ -39,8 +49,8 @@ endif
 
 TESTS = $(top_srcdir)/programs/alive.test
 
-EXTRA_DIST = load_dwg.py
-CLEANFILES = {example,sample}_2000.{bmp,ps,svg,dxf} {example,sample}_2000.dwg-rewrite.dwg
+EXTRA_DIST = load_dwg.py log_unknown.pl
+CLEANFILES = {example,sample}_2000.svg alldwg.inc~
 MAINTAINERCLEANFILES  = *_flymake.[ch] *~ *.i
 
 .c.i:
