@@ -33,8 +33,8 @@ dist_perl_PERL = src/wrap_perl.c src/LibreDWG.pm src/LibreDWG.xs src/Makefile.PL
 
 src/LibreDWG.o: src/LibreDWG.pm src/LibreDWG.xs src/Makefile.PL
 	cd src && \
-	  $(PERL) Makefile.PL CFLAGS="-I$(top_srcdir)/include" \
-                              LDFLAGS="-L$(top_builddir)/src/.libs" && \
+	  $(PERL) Makefile.PL CCFLAGS="-I$(abs_top_srcdir)/include" \
+                              LDFLAGS="-L$(abs_top_builddir)/src/.libs" && \
 	  $(MAKE)
 
 ## perl looks dynamically for LibreDWG.bundle on 'use LibreDWG;'
@@ -50,8 +50,12 @@ SWIG_SOURCES = $(top_srcdir)/bindings/dwg.i \
 	$(top_srcdir)/include/dwg.h \
 	$(top_srcdir)/include/dwg_api.h
 
+# -importall
 $(BUILT_SOURCES): $(SWIG_SOURCES) Makefile.am
-	$(SWIG) -perl5 -importall -I$(abs_top_srcdir)/include -o wrap_perl.c $(srcdir)/../dwg.i && \
-	mv LibreDWG.pm src/ && \
-	sed 's,include "../../include/dwg.h",include "dwg.h",' <wrap_perl.c >src/wrap_perl.c
+	$(SWIG) -perl5 -I$(abs_top_srcdir)/include -o src/wrap_perl.c $(srcdir)/../dwg.i
+
+CLEANFILES = src/LibreDWG.bs src/LibreDWG.c src/pm_to_blib src/Makefile src/LibreDWG.o
+
+check-am: $(dist_perl_PERL)
+	$(MAKE) -C src test
 endif

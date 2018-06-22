@@ -7,9 +7,9 @@ my $ldopts = ldopts;
 chomp($ldopts);
 
 for (@ARGV) {
-  if    (/^CFLAGS=(.*)$/)  { $ccflags = ccopts . " $1"; }
-  elsif (/^LDFLAGS=(.*)$/) { $ldflags = $ldopts . " $1"; }
-  else { warn "ignored arg $_. We only accept CFLAGS and LDFLAGS"; }
+  if    (/^CCFLAGS=(.*)$/)  { $ccflags = ccopts . " $1"; }
+  elsif (/^LDFLAGS=(.*)$/)  { $ldflags = $ldopts . " $1"; }
+  else { warn "ignored arg $_. We only accept CCFLAGS and LDFLAGS"; }
 }
 if (!@ARGV && 
     -d '../../perl' &&

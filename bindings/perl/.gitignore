@@ -2,3 +2,6 @@ src/MYMETA.json
 src/MYMETA.yml
 src/Makefile
 src/blib
+src/LibreDWG.bs
+src/LibreDWG.c
+src/pm_to_blib

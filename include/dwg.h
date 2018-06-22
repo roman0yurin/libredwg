@@ -43,7 +43,9 @@
 # endif
 #endif
 
-#ifdef _WIN32
+#ifdef SWIG
+# define EXPORT extern
+#elif defined(_WIN32)
 # ifdef DLL_EXPORT
 #   define EXPORT  __declspec(dllexport)
 # else
