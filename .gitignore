@@ -51,6 +51,7 @@ gcov.log
 /test/test-data-20*/
 
 # specific filenames
+/.version
 /.cproject
 /.project
 /.patches
