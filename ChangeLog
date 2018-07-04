@@ -1,5 +1,15 @@
 Full history from the git log
 -----------------------------
+2018-07-05  Reini Urban  <rurban@cpan.org>
+
+	First release 0.5
+
+        api: remove wrong comment
+        MULTILEADER spec: more DXF
+        and return earlier on errors
+
+        dxf: protect empty vectors
+        and fix wrong MATERIAL text types for *map_filename
 
 2018-06-30  Reini Urban  <rurban@cpan.org>
 
