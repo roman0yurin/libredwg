@@ -80,7 +80,7 @@ dnl We just want to know if it's needed
 ac_cv_func_malloc_0_nonnull=yes
 ac_cv_func_realloc_0_nonnull=yes
 AC_CHECK_HEADERS([stdlib.h string.h unistd.h malloc.h wchar.h ctype.h \
-                  libgen.h getopt.h])
+                  libgen.h])
 AX_INCLUDE_STRCASECMP
 
 AC_CHECK_HEADER([dejagnu.h], [],
@@ -173,12 +173,13 @@ AC_FUNC_REALLOC
 AC_FUNC_STAT
 AC_CHECK_FUNC([strdup],[],
   AC_MSG_ERROR([strdup not found. Check your _POSIX_C_SOURCE vs ANSI settings.]))
-AC_CHECK_FUNCS([getopt_long],[],
-  AC_MSG_WARN([getopt_long not found. programs will not accept long options.]))
 AC_CHECK_FUNCS([basename],[],
   AC_MSG_WARN([basename not found. The default outfile will be unexpected.]))
 AC_CHECK_FUNCS([strcasestr],[],
   AC_MSG_WARN([strcasestr not found. Using a slower workaround.]))
+dnl AC_CHECK_FUNCS([getopt_long],[],
+dnl   AC_MSG_WARN([getopt_long not found. programs will not accept long options.]))
+AX_FUNC_GETOPT_LONG
 
 dnl Feature: --disable-write
 AC_MSG_CHECKING([--disable-write])
