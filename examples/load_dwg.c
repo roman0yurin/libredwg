@@ -20,6 +20,7 @@
  */
 
 #include <stdio.h>
+#include <dwg.h>
 #include "config.h"
 #include "dwg.h"
 #include "../programs/suffix.inc"
@@ -81,18 +82,25 @@ load_dwg(char *filename, unsigned int opts)
   BITCODE_BL i;
   int success;
   Dwg_Data dwg;
+  Dwg_Object ob;
 
   memset(&dwg, 0, sizeof(Dwg_Data));
   dwg.opts = opts;
   success = dwg_read_file(filename, &dwg);
   for (i = 0; i < dwg.num_objects; i++)
     {
+      ob = dwg.object[i];
       Dwg_Entity_LINE *line;
       Dwg_Entity_CIRCLE *circle;
       Dwg_Entity_TEXT *text;
+      Dwg_Entity_ARC *arc;
 
       switch (dwg.object[i].type)
         {
+          case DWG_TYPE_ARC:
+            arc = dwg.object[i].tio.entity->tio.ARC;
+            add_line(arc->center.x, arc->end_angle, arc->radius, arc->start_angle);
+            break;
         case DWG_TYPE_LINE:
           line = dwg.object[i].tio.entity->tio.LINE;
           add_line(line->start.x, line->end.x, line->start.y, line->end.y);
