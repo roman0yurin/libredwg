@@ -2466,6 +2466,10 @@ dwg_decode_eed(Bit_Chain * dat, Dwg_Object_Object * obj)
               obj->eed[idx].size = 0;
               obj->eed[idx].raw = NULL;
             }
+		  else 
+            {
+              break;
+            }
         }
       dat->byte = end;
     }
