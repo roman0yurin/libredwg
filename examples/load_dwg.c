@@ -97,10 +97,10 @@ load_dwg(char *filename, unsigned int opts)
 
       switch (dwg.object[i].type)
         {
-          case DWG_TYPE_ARC:
-            arc = dwg.object[i].tio.entity->tio.ARC;
-            add_line(arc->center.x, arc->end_angle, arc->radius, arc->start_angle);
-            break;
+        case DWG_TYPE_ARC:
+          arc = dwg.object[i].tio.entity->tio.ARC;
+          add_line(arc->center.x, arc->end_angle, arc->radius, arc->start_angle);
+          break;
         case DWG_TYPE_LINE:
           line = dwg.object[i].tio.entity->tio.LINE;
           add_line(line->start.x, line->end.x, line->start.y, line->end.y);
