@@ -145,6 +145,8 @@ main (int argc, char *argv[])
     return opt_version();
 
   REQUIRE_INPUT_FILE_ARG (argc);
-  load_dwg (argv[i], opts);
+  char *name = "/home/den/Downloads/БезЛиста.dwg";
+  //load_dwg (argv[i], opts);
+  load_dwg (name, opts);
   return 0;
 }

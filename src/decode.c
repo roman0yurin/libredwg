@@ -34,7 +34,6 @@
 #include "dwg.h"
 #include "hash.h"
 #include "decode.h"
-#include "print.h"
 
 /* The logging level for the read (decode) path.  */
 static unsigned int loglevel;
@@ -1583,7 +1582,7 @@ read_R2004_section_map(Bit_Chain* dat, Dwg_Data * dwg)
 
 // index is the Section Number in the section map
 static Dwg_Section*
-find_section(Dwg_Data *dwg, unsigned long int index)
+ find_section(Dwg_Data *dwg, unsigned long int index)
 {
   BITCODE_BL i;
   if (dwg->header.section == 0 || index == 0)
